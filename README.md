@@ -42,7 +42,7 @@ AddressInfo|表示服务提供方将自身提供的服务配置和元数据注�
 ZoneInfo|表示一个Zone的部署配置信息，具体包含name名称，idcName机房名称，cityName城市名称，rpcUrl访问Url配置，以及range用户UserId对应的范围。
 
 最后显示RPC路由处理流程图如下所示：
-![image](http://024028.oss-cn-hangzhou-zmf.aliyuncs.com/uploads/jianqing.sjq/rpc-system/38a20fab4c5a4d9b43ced5b3dda21077/rpcSchedul.png)
+![image](https://github.com/shaojianqing/RpcSystem/blob/master/images/rpcSchedul.png)
 
 ### 4.通用工具类实现组件###
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在rpc-system框架结构中，rpc.system.util即为其通用工具类实现组件。该组件包含各项基础通用的工具类，并提供给其他框架和业务组件基础的工具性功能服务。以下列表说明各个工具类及其相关的接口的具体功能职责和使用说明。
@@ -94,15 +94,15 @@ ThreadUtil|该类为线程启动工具类，用以启动一个新线程。由于
 ## 五.克隆代码并启动运行 ##
 <br />
 
-### 1.从gitlab克隆版本库源码 ###
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 打开控制台Console程序，执行mkdir RpcEngineering命令，新建RPC框架源码的工作空间目录；并执行cd命令进入该目录，然后执行git clone http://gitlab.alipay-inc.com/jianqing.sjq/rpc-system.git命令，从Gitlab版本库中克隆源码到工作空间目录中。完整的步骤如下图所示：
-![image](http://024028.oss-cn-hangzhou-zmf.aliyuncs.com/uploads/jianqing.sjq/rpc-system/40afc47ecec4651a0cb616f7d7741aa1/cloneSourceCode.png)
+### 1.从GitHub克隆版本库源码 ###
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 打开控制台Console程序，执行mkdir RpcEngineering命令，新建RPC框架源码的工作空间目录；并执行cd命令进入该目录，然后执行git clone https://github.com/shaojianqing/RpcSystem.git命令，从GitHub版本库中克隆源码到工作空间目录中。完整的步骤如下图所示：
+![image](https://github.com/shaojianqing/RpcSystem/blob/master/images/cloneSourceCode.png)
 ### 2.使用eclipse导入源码并生成maven工程 ###
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 打开eclipse(建议较高版本的eclipse)，并将eclipse的工作空间设置为RpcEngineering目录。然后在eclipse中进行导入Existing Maven Projects操作，选择上一步中clone下来的rpc-system工程目录。最后完成工程导入操作，如下图所示：
-![image](http://024028.oss-cn-hangzhou-zmf.aliyuncs.com/uploads/jianqing.sjq/rpc-system/dc9ae202eb17c29e3bd0efa39e63f26a/importSourceCode.png)
+![image](https://github.com/shaojianqing/RpcSystem/blob/master/images/importSourceCode.png)
 ### 3.安装Postgresql数据库并创建对应数据表 ###
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 安装postgresql数据库系统，并设置postgresql账户的密码为postgres，最后登录数据库管理工具pgAdmin，并创建测试数据库System，以及其中的所有数据表。如下图所示：
-![image](http://024028.oss-cn-hangzhou-zmf.aliyuncs.com/uploads/jianqing.sjq/rpc-system/8011aaf773aaf0c3759c989350bc3129/rpcDatabase.png)
+![image](https://github.com/shaojianqing/RpcSystem/blob/master/images/rpcDatabase.png)
 
 对于上述数据库和数据表，建议采用DDL语句进行创建，以下为建库和建表DDL语句:
 
@@ -253,21 +253,21 @@ ALTER TABLE public.userinfo
 ```
 ### 4.在本地的hosts设置RPC运行过程中所涉及的域名与IP映射关系 ###
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 由于在RPC调用过程中，涉及的各项管控与路由组件访问的地址均为域名形式。于此同时，真正进行各项管控与路由的机制需要基于IP地址进行直接的通信，因此需要在本地hosts文件中设置域名与IP的映射关系配置。具体配置内容请参考以下图示：
-![image](http://024028.oss-cn-hangzhou-zmf.aliyuncs.com/uploads/jianqing.sjq/rpc-system/3cb566ce6d4b6c9971991da4e28c3305/hostConfig.png)
+![image](https://github.com/shaojianqing/RpcSystem/blob/master/images/hostConfig.png)
 ### 5.启动程序生成所有测试数据 ###
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 完成上述各项准备工作之后，运行环境已经准备完成，接下去要进行测试数据的准备工作。笔者已经在RPC框架中开发了测试数据生成的相关实现类，可以直接调用TestDataGenerator，并启动其中的main方法即可生成全部的测试数据。完成测试数据的生成工作之后，请登录数据库管理工具，在postgresql数据库中查看生成的测试数据是否正确以及符合预期。具体操作如下图所示：
 
-![image](http://024028.oss-cn-hangzhou-zmf.aliyuncs.com/uploads/jianqing.sjq/rpc-system/a3bbe65c8d096760586861de90e51bbf/generateTestData.png)
+![image](https://github.com/shaojianqing/RpcSystem/blob/master/images/generateTestData.png)
 
 生成测试数据的程序TestDataGenerator
 
-![image](http://024028.oss-cn-hangzhou-zmf.aliyuncs.com/uploads/jianqing.sjq/rpc-system/3f1164b2f3759db11a615898fa428770/checkTestData.png)
+![image](https://github.com/shaojianqing/RpcSystem/blob/master/images/checkTestData.png)
 
 检查测试程序生成的数据是否正确并符合预期
 
 ### 6.选择测试数据的userId值 ###
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 测试数据生成完成之后，考虑到RPC框架按照userId的最后两位进行数据的分布与定位，以及通过userId进行各项数据和测试操作。因此，需要基于生成的测试数据，在服务消费者的rpc调用程序里面，根据userId的数据分布规则，进行userId选取和设置。具体操作如下图所示：
-![image](http://024028.oss-cn-hangzhou-zmf.aliyuncs.com/uploads/jianqing.sjq/rpc-system/04be73e138799861e9d6fcdae3b70060/selectUserIdData.png)
+![image](https://github.com/shaojianqing/RpcSystem/blob/master/images/selectUserIdData.png)
 ### 7.启动各项服务组件和服务提供者应用 ###
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 完成上述各项操作与准备工作之后，环境与数据的准备工作已经全部完成。之后需要逐步启动各项RPC管控与路由的基础服务设施，以下按顺序分别启动各项RPC基础服务:
 
@@ -279,15 +279,15 @@ ALTER TABLE public.userinfo
 
 ### 8.启动服务消费者应用并查看服务调用日志 ###
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 最后，在完成上述各项准备工作之后，即可进行RPC的验证与测试过程。直接启动服务消费者实现组件，具体应用为rpc.system.consumer。之后，查看服务消费方的控制台输出和服务提供方的控制台输出，具体操作如下图所示：
-![image](http://024028.oss-cn-hangzhou-zmf.aliyuncs.com/uploads/jianqing.sjq/rpc-system/1954b159d0d4a78ef3522df5601e852b/startTestData.png)
+![image](https://github.com/shaojianqing/RpcSystem/blob/master/images/startTestData.png)
 
 启动并运行服务消费者测试程序
 
-![image](http://024028.oss-cn-hangzhou-zmf.aliyuncs.com/uploads/jianqing.sjq/rpc-system/cf3405f9e0999f2e4671da23bf7757af/testOutputClient.png)
+![image](https://github.com/shaojianqing/RpcSystem/blob/master/images/testOutputClient.png)
 
 服务消费者测试日志输出
 
-![image](http://024028.oss-cn-hangzhou-zmf.aliyuncs.com/uploads/jianqing.sjq/rpc-system/818678ab5cba42d237dbe4bf680f7578/testOutputServer.png)
+![image](https://github.com/shaojianqing/RpcSystem/blob/master/images/testOutputServer.png)
 
 服务提供者测试日志输出
 
