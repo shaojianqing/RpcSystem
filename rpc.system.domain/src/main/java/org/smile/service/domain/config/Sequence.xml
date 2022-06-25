@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sqlMapInfo namespace="org.smile.service.domain.sequence.Sequence">
+
+	<resultDataMap id="SequenceDataMap" class="org.smile.service.domain.sequence.Sequence">
+		<result property="name" column="name" javaType="java.lang.String" />
+		<result property="value" column="value" javaType="java.lang.Long" />
+		<result property="minValue" column="minValue" javaType="java.lang.Long" />
+		<result property="maxValue" column="maxValue" javaType="java.lang.Long" />
+		<result property="createTime" column="createTime" javaType="java.sql.Timestamp" />
+		<result property="operateTime" column="operateTime" javaType="java.sql.Timestamp" />
+	</resultDataMap>
+	
+	<select id="org.smile.service.domain.sequence.getSequenceByName" resultDataMap="SequenceDataMap" parameterType="java.lang.String">	
+		
+		select 
+			name,
+			value,
+			minValue,
+			maxValue,
+			createTime,
+			operateTime
+		from 
+			Sequence
+		where
+			name = #name#		
+	</select>
+	
+	<insert id="org.smile.service.domain.sequence.saveSequence" parameterType="org.smile.service.domain.sequence.Sequence" >
+	
+		insert into Sequence(
+			name,
+			value,
+			minValue,
+			maxValue,
+			createTime,
+			operateTime)
+		values (
+			#name#,
+			#value#, 
+			#minValue#, 
+			#maxValue#, 
+			#createTime#, 
+			#operateTime# )
+	</insert>
+	
+	<update id="org.smile.service.domain.sequence.updateSequence" parameterType="org.smile.service.domain.sequence.Sequence" >
+	
+		update Sequence set
+			value = #value#,			
+			minValue = #minValue#,
+			maxValue = #maxValue#,
+			createtime = #createTime#,
+			operatetime = #operateTime#
+		where name = #name#
+	</update>
+	
+	<update id="org.smile.service.domain.sequence.updateSequenceValue" parameterType="java.util.Map" >
+	
+		update Sequence set
+			value = #value#
+		where name = #name#
+	</update>
+
+</sqlMapInfo>

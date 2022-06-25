@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sqlMapInfo namespace="org.smile.service.domain.record.OperateRecord">
+
+	<resultDataMap id="operateRecordDataMap" class="org.smile.service.domain.record.OperateRecord">
+		<result property="id" column="id" javaType="java.lang.String" />
+		<result property="operatorId" column="operatorId" javaType="java.lang.String" />
+		<result property="operateType" column="operateType" javaType="java.lang.String" />
+		<result property="targetType" column="targetType" javaType="java.lang.Double" />
+		<result property="targetId" column="targetId" javaType="java.lang.String" />
+		<result property="isValid" column="isValid" javaType="java.lang.Short" />
+		<result property="createTime" column="createTime" javaType="java.sql.Timestamp" />
+		<result property="operateTime" column="operateTime" javaType="java.sql.Timestamp" />
+	</resultDataMap>
+	
+	<select id="org.smile.service.domain.record.getOperateRecordById" resultDataMap="operateRecordDataMap" parameterType="java.lang.String">	
+		
+		select 
+			id,
+			operatorId,
+			operateType,
+			targetType,
+			targetId,
+			isValid,
+			createTime,
+			operateTime
+		from 
+			OperateRecord
+		where
+			id = #id#		
+	</select>
+	
+	<insert id="org.smile.service.domain.record.saveOperateRecord" parameterType="org.smile.service.domain.record.OperateRecord" >
+	
+		insert into OperateRecord (
+			id,
+			operatorId,
+			operateType,
+			targetType,
+			targetId,
+			isValid,
+			createTime,
+			operateTime)
+		values (
+			#id#,
+			#operatorId#, 
+			#operateType#, 
+			#targetType#, 
+			#targetId#,
+			#isValid#, 
+			#createTime#, 
+			#operateTime# )
+	</insert>
+	
+	<update id="org.smile.service.domain.record.updateOperateRecord" parameterType="org.smile.service.domain.record.OperateRecord" >
+	
+		update OperateRecord set
+			operatorId = #operatorId#,
+			operateType = #operateType#,			
+			targetType = #targetType#,
+			targetId = #targetId#,
+			isvalid = #isValid#,
+			createtime = #createTime#,
+			operatetime = #operateTime#
+		where id = #id#
+	</update>
+
+</sqlMapInfo>

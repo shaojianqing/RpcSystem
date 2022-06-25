@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sqlMapInfo namespace="org.smile.service.domain.accountbill.AccountBill">
+
+	<resultDataMap id="accountBillDataMap" class="org.smile.service.domain.accountbill.AccountBill">
+		<result property="id" column="id" javaType="java.lang.String" />
+		<result property="userInfoId" column="userInfoId" javaType="java.lang.String" />
+		<result property="accountBillNo" column="accountBillNo" javaType="java.lang.String" />
+		<result property="amount" column="amount" javaType="java.lang.Double" />
+		<result property="billType" column="billType" javaType="java.lang.String" />
+		<result property="billTime" column="billTime" javaType="java.lang.Long" />
+		<result property="isValid" column="isValid" javaType="java.lang.Short" />
+		<result property="createTime" column="createTime" javaType="java.sql.Timestamp" />
+		<result property="operateTime" column="operateTime" javaType="java.sql.Timestamp" />
+	</resultDataMap>
+	
+	<select id="org.smile.service.domain.accountbill.getAccountBillById" resultDataMap="accountBillDataMap" parameterType="java.lang.String">	
+		
+		select 
+			id,
+			userInfoId,
+			accountBillNo,
+			amount,
+			billType,
+			billTime,
+			isValid,
+			createTime,
+			operateTime
+		from 
+			AccountBill
+		where
+			id = #id#		
+	</select>
+	
+	<select id="org.smile.service.domain.accountbill.queryAccountBillByUserId" resultDataMap="accountBillDataMap" parameterType="java.lang.String">	
+		
+		select 
+			id,
+			userInfoId,
+			accountBillNo,
+			amount,
+			billType,
+			billTime,
+			isValid,
+			createTime,
+			operateTime
+		from 
+			AccountBill
+		where
+			userInfoId = #userInfoId#		
+	</select>
+	
+	<insert id="org.smile.service.domain.accountbill.saveAccountBill" parameterType="org.smile.service.domain.accountbill.AccountBill" >
+	
+		insert into AccountBill (
+			id,
+			userInfoId,
+			accountBillNo,
+			amount,
+			billType,
+			billTime,
+			isValid,
+			createTime,
+			operateTime)
+		values (
+			#id#,
+			#userInfoId#, 
+			#accountBillNo#, 
+			#amount#, 
+			#billType#, 
+			#billTime#, 
+			#isValid#, 
+			#createTime#, 
+			#operateTime# )
+	</insert>
+	
+	<update id="org.smile.service.domain.accountbill.updateAccountBill" parameterType="org.smile.service.domain.accountbill.AccountBill" >
+	
+		update AccountBill set
+			userInfoId = #userInfoId#,
+			accountBillNo = #accountBillNo#,			
+			amount = #amount#,
+			billType = #billType#,
+			billTime = #billTime#,
+			isvalid = #isValid#,
+			createtime = #createTime#,
+			operatetime = #operateTime#
+		where id = #id#
+	</update>
+
+</sqlMapInfo>

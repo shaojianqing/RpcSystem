@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sqlMapInfo namespace="org.smile.service.domain.accountinfo.AccountInfo">
+
+	<resultDataMap id="accountInfoDataMap" class="org.smile.service.domain.accountinfo.AccountInfo">
+		<result property="id" column="id" javaType="java.lang.String" />
+		<result property="userInfoId" column="userInfoId" javaType="java.lang.String" />
+		<result property="totalBalance" column="totalBalance" javaType="java.lang.Double" />
+		<result property="totalExpanse" column="totalExpanse" javaType="java.lang.Double" />
+		<result property="totalProfit" column="totalProfit" javaType="java.lang.Double" />
+		<result property="isValid" column="isValid" javaType="java.lang.Short" />
+		<result property="createTime" column="createTime" javaType="java.sql.Timestamp" />
+		<result property="operateTime" column="operateTime" javaType="java.sql.Timestamp" />
+	</resultDataMap>
+	
+	<select id="org.smile.service.domain.accountinfo.getAccountInfoById" resultDataMap="accountInfoDataMap" parameterType="java.lang.String">	
+		
+		select 
+			id,
+			userInfoId,
+			totalBalance,
+			totalExpanse,
+			totalProfit,
+			isValid,
+			createTime,
+			operateTime
+		from 
+			AccountInfo
+		where
+			id = #id#		
+	</select>
+	
+	<select id="org.smile.service.domain.accountinfo.getAccountInfoByUserInfoId" resultDataMap="accountInfoDataMap" parameterType="java.lang.String">	
+		
+		select 
+			id,
+			userInfoId,
+			totalBalance,
+			totalExpanse,
+			totalProfit,
+			isValid,
+			createTime,
+			operateTime
+		from 
+			AccountInfo
+		where
+			userInfoId = #userInfoId#		
+	</select>
+	
+	<insert id="org.smile.service.domain.accountinfo.saveAccountInfo" parameterType="org.smile.service.domain.accountinfo.AccountInfo" >
+	
+		insert into AccountInfo (
+			id,
+			userInfoId,
+			totalBalance,
+			totalExpanse,
+			totalProfit,
+			isValid,
+			createTime,
+			operateTime)
+		values (
+			#id#,
+			#userInfoId#, 
+			#totalBalance#, 
+			#totalExpanse#, 
+			#totalProfit#,  
+			#isValid#, 
+			#createTime#, 
+			#operateTime# )
+	</insert>
+	
+	<update id="org.smile.service.domain.accountinfo.updateAccountInfo" parameterType="org.smile.service.domain.accountinfo.AccountInfo" >
+	
+		update AccountInfo set
+			userInfoId = #userInfoId#,
+			totalBalance = #totalBalance#,			
+			totalExpanse = #totalExpanse#,
+			totalProfit = #totalProfit#,
+			isvalid = #isValid#,
+			createtime = #createTime#,
+			operatetime = #operateTime#
+		where id = #id#
+	</update>
+
+</sqlMapInfo>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sqlMapInfo namespace="org.smile.service.domain.userinfo.UserInfo">
+
+	<resultDataMap id="UserInfoDataMap" class="org.smile.service.domain.userinfo.UserInfo">
+		<result property="id" column="id" javaType="java.lang.String" />
+		<result property="username" column="username" javaType="java.lang.String" />
+		<result property="password" column="password" javaType="java.lang.String" />
+		<result property="name" column="name" javaType="java.lang.String" />
+		<result property="birthday" column="birthday" javaType="java.util.Date" />
+		<result property="idNumber" column="idNumber" javaType="java.lang.String" />
+		<result property="isValid" column="isValid" javaType="java.lang.Short" />
+		<result property="createTime" column="createTime" javaType="java.sql.Timestamp" />
+		<result property="operateTime" column="operateTime" javaType="java.sql.Timestamp" />
+	</resultDataMap>
+	
+	<select id="org.smile.service.domain.userinfo.getUserInfoById" resultDataMap="UserInfoDataMap" parameterType="java.lang.String">	
+		
+		select 
+			id,
+			username,
+			password,
+			name,
+			birthday,
+			idNumber,
+			isValid,
+			createTime,
+			operateTime
+		from 
+			UserInfo
+		where
+			id = #id#		
+	</select>
+	
+	<insert id="org.smile.service.domain.userinfo.saveUserInfo" parameterType="org.smile.service.domain.userinfo.UserInfo" >
+	
+		insert into UserInfo(
+			id, 
+			username, 
+			password, 
+			name, 
+			birthday, 
+			idnumber, 
+			isvalid, 
+			createtime, 
+			operatetime)
+		values (
+			#id#,
+			#username#, 
+			#password#, 
+			#name#, 
+			#birthday#, 
+			#idNumber#, 
+			#isValid#, 
+			#createTime#, 
+			#operateTime# )
+	</insert>
+	
+	<update id="org.smile.service.domain.userinfo.updateUserInfo" parameterType="org.smile.service.domain.userinfo.UserInfo" >
+	
+		update UserInfo set
+			username = #username#,
+			password = #password#,			
+			name = #name#,
+			birthday = #birthday#,
+			idnumber = #idNumber#,
+			isvalid = #isValid#,
+			createtime = #createTime#,
+			operatetime = #operateTime#
+		where id = #id#
+	</update>
+
+</sqlMapInfo>

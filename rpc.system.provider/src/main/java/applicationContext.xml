@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://rpc.system.org/beans"
+	xmlns:rpc="http://rpc.system.org/service"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	
+	<bean id="dataSource" class="org.smile.framework.orm.datasource.BasicDataSource">
+		<property name="driver" value="org.postgresql.Driver"/>
+		<property name="url" value="jdbc:postgresql://127.0.0.1/System"/>
+		<property name="username" value="postgres"/>
+		<property name="password" value="20072251"/>
+	</bean>
+	
+	<bean id="sqlMapClientTemplate" class="org.smile.framework.orm.template.SqlMapClientTemplate" init-method="initTemplate">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperList">
+			<list>
+				<value>org/smile/service/domain/config/Sequence.xml</value>
+				<value>org/smile/service/domain/config/UserInfo.xml</value>
+				<value>org/smile/service/domain/config/AccountInfo.xml</value>
+				<value>org/smile/service/domain/config/AccountBill.xml</value>
+				<value>org/smile/service/domain/config/OperateRecord.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="transactionManager" class="org.smile.framework.orm.transaction.TransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="transactionTemplate" class="org.smile.framework.orm.transaction.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager" />
+	</bean>
+	
+	<bean id="sequenceDao" class="org.smile.service.sequence.dao.impl.SequenceDaoImpl">
+		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+	</bean>
+	
+	<bean id="userInfoDao" class="org.smile.service.userinfo.dao.impl.UserInfoDaoImpl">
+		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+	</bean>
+	
+	<bean id="accountBillDao" class="org.smile.service.accountbill.dao.impl.AccountBillDaoImpl">
+		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+	</bean>
+	
+	<bean id="accountInfoDao" class="org.smile.service.accountinfo.dao.impl.AccountInfoDaoImpl">
+		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+	</bean>
+	
+	<bean id="operateRecordDao" class="org.smile.service.operaterecord.dao.impl.OperateRecordDaoImpl">
+		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+	</bean>
+	
+	<bean id="sequenceService" class="org.smile.service.sequence.impl.SequenceServiceImpl">
+		<property name="sequenceDao" ref="sequenceDao" />
+	</bean>
+	
+	<bean id="userInfoService" class="org.smile.service.userinfo.impl.UserInfoServiceImpl">
+		<property name="transactionTemplate" ref="transactionTemplate" />
+		<property name="sequenceService" ref="sequenceService" />
+		<property name="userInfoDao" ref="userInfoDao" />
+		<property name="accountInfoDao" ref="accountInfoDao" />
+		<property name="operateRecordDao" ref="operateRecordDao" />
+	</bean>
+	
+	<bean id="accountBillService" class="org.smile.service.accountbill.impl.AccountBillServiceImpl">
+		<property name="transactionTemplate" ref="transactionTemplate" />
+		<property name="sequenceService" ref="sequenceService" />
+		<property name="userInfoService" ref="userInfoService" />
+		<property name="accountBillDao" ref="accountBillDao" />
+		<property name="accountInfoDao" ref="accountInfoDao" />
+		<property name="operateRecordDao" ref="operateRecordDao" />
+	</bean>
+	
+	<bean id="accountInfoService" class="org.smile.service.accountinfo.impl.AccountInfoServiceImpl">
+		<property name="accountInfoDao" ref="accountInfoDao" />
+	</bean>
+	
+	<rpc:service reference="userInfoService" interface="org.smile.service.facade.IUserInfoService">
+		<rpc:protocol type="json" />
+	</rpc:service>
+	
+	<rpc:service reference="accountBillService" interface="org.smile.service.facade.IAccountBillService">
+		<rpc:protocol type="json" />
+	</rpc:service>
+	
+	<rpc:service reference="accountInfoService" interface="org.smile.service.facade.IAccountInfoService">
+		<rpc:protocol type="json" />
+	</rpc:service>
+	
+</beans>

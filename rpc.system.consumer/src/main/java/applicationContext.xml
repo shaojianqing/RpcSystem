@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://rpc.system.org/beans"
+	xmlns:rpc="http://rpc.system.org/service"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	
+	<bean id="accountBillAction" class="org.smile.service.consumer.accountbill.action.AccountBillAction" />
+	
+	<bean id="accountInfoAction" class="org.smile.service.consumer.accountinfo.action.AccountInfoAction" />
+	
+	<bean id="userInfoAction" class="org.smile.service.consumer.userinfo.action.UserInfoAction" />
+
+	<rpc:reference id="userInfoService" interface="org.smile.service.facade.IUserInfoService">
+		<rpc:protocol type="json" />
+		<vip only="false" >
+			<targetUrl url="rz01.system.org" />
+		</vip>
+	</rpc:reference>
+	
+	<rpc:reference id="accountBillService" interface="org.smile.service.facade.IAccountBillService">
+		<rpc:protocol type="json" />
+		<vip only="false" >
+			<targetUrl url="rz02.system.org" />
+		</vip>
+	</rpc:reference>
+	
+	<rpc:reference id="accountInfoService" interface="org.smile.service.facade.IAccountInfoService">
+		<rpc:protocol type="json" />
+		<vip only="false" >
+			<targetUrl url="rz05.system.org" />
+		</vip>
+	</rpc:reference>
+	
+</beans>
